@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthDocs - Medical Document Management</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Dreamy Animated Background -->
+    <div class="bg-animation">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Soft Pastel Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="60" height="60" rx="18" fill="url(#paint0_linear)"/>
+                            <path d="M30 18V42M18 30H42" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#E8B4D4"/>
+                                    <stop offset="1" stop-color="#C7B8EA"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>HealthDocs</h1>
+                        <p class="tagline">Your Medical Records, Secured & Organized</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section glass-card">
+                <div class="section-title">
+                    <div class="icon-wrapper upload-icon">
+                        {% comment %} <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"> {% endcomment %}
+                            <path d="M14 18V4M14 4L9 9M14 4L19 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3 20L3.931 23.485C4.06598 24.0177 4.37382 24.4918 4.80533 24.8363C5.23684 25.1808 5.76751 25.3751 6.315 25.39H21.685C22.2325 25.3751 22.7632 25.1808 23.1947 24.8363C23.6262 24.4918 23.934 24.0177 24.069 23.485L25 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>Upload Medical Document</h2>
+                    </div>
+                </div>
+
+                <form id="uploadForm" class="upload-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="upload-area" id="uploadArea">
+                            <input 
+                                type="file" 
+                                id="fileInput" 
+                                name="file" 
+                                accept=".pdf,application/pdf"
+                                required
+                            >
+                            <div class="upload-content">
+                                <div class="upload-icon-large">
+                                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="40" cy="40" r="40" fill="url(#paint0_radial)" fill-opacity="0.5"/>
+                                        <path d="M40 50V25M40 25L32 33M40 25L48 33" stroke="url(#paint1_linear)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M25 45L26.035 49.828C26.2158 50.5359 26.6319 51.1632 27.2173 51.6047C27.8028 52.0463 28.5251 52.2769 29.2693 52.2577H50.7307C51.4749 52.2769 52.1972 52.0463 52.7827 51.6047C53.3681 51.1632 53.7842 50.5359 53.965 49.828L55 45" stroke="url(#paint1_linear)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <defs>
+                                            <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(40 40) rotate(90) scale(40)">
+                                                <stop stop-color="#E8B4D4"/>
+                                                <stop offset="1" stop-color="#E8B4D4" stop-opacity="0"/>
+                                            </radialGradient>
+                                            <linearGradient id="paint1_linear" x1="25" y1="25" x2="55" y2="55" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#C7B8EA"/>
+                                                <stop offset="1" stop-color="#E8B4D4"/>
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div class="upload-text">
+                                    <p class="upload-main-text">Drop your PDF here or <span class="upload-link">browse</span></p>
+                                    <p class="upload-sub-text">Maximum file size: 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="filePreview" class="file-preview" style="display: none;">
+                            <div class="file-preview-content">
+                                <div class="file-icon">📄</div>
+                                <div class="file-info">
+                                    <p id="fileName" class="file-name"></p>
+                                    <p id="fileSize" class="file-size"></p>
+                                </div>
+                                <button type="button" class="remove-file" id="removeFile">✕</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-gradient" id="uploadBtn">
+                        <span class="btn-text">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 15V4M11 4L8 7M11 4L14 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 14L4.621 17.071C4.71645 17.4771 4.94402 17.8416 5.26956 18.1106C5.59511 18.3797 6.00251 18.5387 6.42633 18.5644H15.5737C15.9975 18.5387 16.4049 18.3797 16.7304 18.1106C17.056 17.8416 17.2836 17.4771 17.379 17.071L18 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Upload Document
+                        </span>
+                        <span class="spinner" id="uploadSpinner"></span>
+                    </button>
+                </form>
+
+                <!-- Message Display -->
+                <div id="messageContainer"></div>
+            </section>
+
+            <!-- Documents List Section -->
+            <section class="documents-section glass-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <div class="icon-wrapper list-icon">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 6H8C7.46957 6 6.96086 6.21071 6.58579 6.58579C6.21071 6.96086 6 7.46957 6 8V22C6 22.5304 6.21071 23.0391 6.58579 23.4142C6.96086 23.7893 7.46957 24 8 24H20C20.5304 24 21.0391 23.7893 21.4142 23.4142C21.7893 23.0391 22 22.5304 22 22V8C22 7.46957 21.7893 6.96086 21.4142 6.58579C21.0391 6.21071 20.5304 6 20 6H18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 6C10 5.46957 10.2107 4.96086 10.5858 4.58579C10.9609 4.21071 11.4696 4 12 4H16C16.5304 4 17.0391 4.21071 17.4142 4.58579C17.7893 4.96086 18 5.46957 18 6C18 6.53043 17.7893 7.03914 17.4142 7.41421C17.0391 7.78929 16.5304 8 16 8H12C11.4696 8 10.9609 7.78929 10.5858 7.41421C10.2107 7.03914 10 6.53043 10 6Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2>My Documents</h2>
+                            <p class="section-subtitle">Access and manage your medical records</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-state">
+                    <div class="spinner-container">
+                        <div class="spinner-large"></div>
+                    </div>
+                    <p>Loading your documents...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <div class="empty-illustration">
+                        <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="70" cy="70" r="70" fill="url(#paint0_radial_empty)"/>
+                            <rect x="50" y="45" width="40" height="50" rx="6" stroke="url(#paint1_linear_empty)" stroke-width="4" fill="none"/>
+                            <path d="M60 60H80M60 72H80M60 84H72" stroke="url(#paint1_linear_empty)" stroke-width="4" stroke-linecap="round"/>
+                            <defs>
+                                <radialGradient id="paint0_radial_empty" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(70 70) rotate(90) scale(70)">
+                                    <stop stop-color="#F3EEFF"/>
+                                    <stop offset="1" stop-color="#FFF5FA"/>
+                                </radialGradient>
+                                <linearGradient id="paint1_linear_empty" x1="50" y1="45" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#C7B8EA"/>
+                                    <stop offset="1" stop-color="#E8B4D4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>No documents yet</h3>
+                    <p>Upload your first medical document to get started with HealthDocs</p>
+                </div>
+
+                <!-- Documents List -->
+                <div id="documentsList" class="documents-list" style="display: none;"></div>
+            </section>
+        </main>
+
+        <!-- Soft Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 HealthDocs</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
