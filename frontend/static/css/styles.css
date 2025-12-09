@@ -32,7 +32,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #F0F8FF 100%);
+    background: linear-gradient(135deg, #F3E8FF 0%, #FAF5FF 50%, #F8F0FF 100%);
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
@@ -65,7 +65,7 @@ body {
     height: 400px;
     top: -10%;
     left: -5%;
-    background: radial-gradient(circle, rgba(197, 227, 246, 0.3) 0%, rgba(197, 227, 246, 0) 70%);
+    background: radial-gradient(circle, rgba(199, 184, 234, 0.3) 0%, rgba(199, 184, 234, 0) 70%);
     animation-delay: 0s;
 }
 
@@ -74,7 +74,7 @@ body {
     height: 350px;
     top: 50%;
     right: -10%;
-    background: radial-gradient(circle, rgba(227, 242, 253, 0.3) 0%, rgba(227, 242, 253, 0) 70%);
+    background: radial-gradient(circle, rgba(232, 180, 212, 0.3) 0%, rgba(232, 180, 212, 0) 70%);
     animation-delay: 7s;
 }
 
@@ -83,7 +83,7 @@ body {
     height: 300px;
     bottom: 10%;
     left: 40%;
-    background: radial-gradient(circle, rgba(240, 248, 255, 0.3) 0%, rgba(240, 248, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(212, 200, 235, 0.3) 0%, rgba(212, 200, 235, 0) 70%);
     animation-delay: 14s;
 }
 
@@ -117,7 +117,7 @@ body {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(30px) saturate(150%);
     -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 3px solid rgba(199, 184, 234, 0.6);
     border-radius: 24px;
     padding: 25px 30px;
     margin-bottom: 25px;
@@ -202,7 +202,7 @@ body {
     margin-bottom: 20px;
     box-shadow: 0 8px 32px rgba(199, 184, 234, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border: 3px solid rgba(199, 184, 234, 0.6);
     animation: fadeInUp 0.8s ease-out;
     animation-fill-mode: both;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
